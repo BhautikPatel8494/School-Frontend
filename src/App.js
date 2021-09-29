@@ -14,7 +14,6 @@ import History from "./component/History/History";
 import About from "./component/About/About";
 import StudentHistory from "./component/StudentHistory/StudentHistory";
 
-console.log(`object`)
 function App() {
   return (
     <>
