@@ -1,0 +1,24 @@
+.addMcqForm {
+  padding: 10px;
+  height: 90vh;
+}
+.questionDiv{
+  margin: 30px 10px;
+  background-color: #e3e3e3;
+  padding: 18px;
+  border-radius:10px;
+}
+.titleDeleteFlex{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+}
+.flexTitle{
+  width:95%;
+}
+.deleteFlex{
+  width: 5%;
+  font-size: 20px;
+  text-align: right;
+  color: firebrick;
+}

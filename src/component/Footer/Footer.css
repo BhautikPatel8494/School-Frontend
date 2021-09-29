@@ -1,0 +1,12 @@
+.footerMainDiv{
+    width: 100%;
+    background-color: black;
+    color: rgb(187, 187, 187);
+    height: 40vh;
+}
+.liFooter{
+    display: inline;
+    text-decoration: none;
+    padding: 20px 30px;
+    font-size: 20px;
+}

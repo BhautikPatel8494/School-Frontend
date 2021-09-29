@@ -1,0 +1,1 @@
+export const tokenLogin = sessionStorage.getItem("token");
