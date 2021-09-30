@@ -1,8 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
-import "react-toastify/dist/ReactToastify.css";
-import "react-multi-carousel/lib/styles.css";
 import Login from "./component/Login/Login";
 import Register from "./component/Register/Register";
 import Home from "./component/Home/Home";
@@ -13,19 +10,23 @@ import ExamDone from "./component/GiveExam/ExamDone";
 import History from "./component/History/History";
 import About from "./component/About/About";
 import StudentHistory from "./component/StudentHistory/StudentHistory";
+import Addmission from "./component/Addmission/Addmission";
+
+import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import "react-multi-carousel/lib/styles.css";
+import AddmissionInfo from "./component/Addmission/AddmissionInfo";
 
 function App() {
   return (
     <>
       <Router>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
+        <Route component={Login} path="/login" />
+        <Route component={Register} path="/register" />
         <PrivateRoute component={Home} exact path="/" />
         <PrivateRoute component={About} exact path="/about" />
+        <PrivateRoute component={Addmission} exact path="/addmission" />
+        <PrivateRoute component={AddmissionInfo} exact path="/addmissionInfo" />
         <PrivateRoute component={Mcq} exact path="/mcq" />
         <PrivateRoute component={GiveExam} exact path="/exam" />
         <PrivateRoute component={ExamDone} exact path="/examdone" />

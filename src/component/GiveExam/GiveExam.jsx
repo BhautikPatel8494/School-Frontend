@@ -1,11 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import Header from "../Header/Header";
-import { useHistory } from "react-router";
+import { tokenLogin } from "../constant";
 
 import "./GiveExam.css";
-import { tokenLogin } from "../constant";
+import { getExamQuestion } from "../../utils/GlobalApi";
 
 export default function GiveExam() {
   const { push } = useHistory();
@@ -22,13 +23,12 @@ export default function GiveExam() {
 
   const startExamHandler = async () => {
     setExam(true);
-    const getExamQuestion = await axios.get(
-      "http://192.168.29.6:8000/exam/examQuestion",
+    const response = await getExamQuestion(
       {
-        headers: { Authorization: `Bearer ${tokenLogin}` },
+        url: 'exam/examQuestion'
       }
     );
-    setGetRandom(getExamQuestion.data.data);
+    setGetRandom(response.data.data);
     startTimer();
   };
 

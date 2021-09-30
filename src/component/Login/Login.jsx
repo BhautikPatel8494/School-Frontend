@@ -11,7 +11,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   const formSubmitHandler = async (e) => {
@@ -43,7 +43,7 @@ const Login = () => {
       const response = await axios.post(
         "http://192.168.29.6:8000/auth/login-user",
         {
-          email:userEmail,
+          loginName:userName,
           password:userPassword,
         }
       );
@@ -119,11 +119,11 @@ const Login = () => {
                 <Form onSubmit={(e) => userLoginHandler(e)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <h3 className="my-3"> Student's Login</h3>
-                  <Form.Label>Email address</Form.Label>
+                  <Form.Label> UserName </Form.Label>
                   <Form.Control
-                    onChange={(e) => setUserEmail(e.target.value)}
-                    type="email"
-                    placeholder="Enter email"
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder="UserName"
                   />
                 </Form.Group>
 

@@ -8,20 +8,20 @@ import { useHistory } from "react-router";
 const Register = () => {
   const { push } = useHistory();
 
-  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profileHandler, setProfileHandler] = useState("");
-  const [role, setRole] = useState("");
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     let data = new FormData();
-    data.append("username", userName);
+    data.append("firstname", firstName);
+    data.append("lastname", lastName);
     data.append("email", email);
     data.append("password", password);
     data.append("profile", profileHandler);
-    data.append("role", role);
 
     try {
       const response = await axios.post(
@@ -34,7 +34,6 @@ const Register = () => {
           push("/login");
         }, 5000);
       }
-      console.log(`response`, response)
     } 
     catch (error) {
       console.log(`error`, error);
@@ -50,16 +49,29 @@ const Register = () => {
         <Row>
           <Col>
             <Form onSubmit={(e) => formSubmitHandler(e)}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>User Name</Form.Label>
+              <Row>
+              <Form.Group as={Col} className="mb-3" controlId="formBasicEmail">
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   type="text"
                   name="username"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Enter User"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="Enter First Name"
                 />
               </Form.Group>
+
+              <Form.Group as={Col} className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="username"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Enter Last Name"
+                />
+              </Form.Group>
+              </Row>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -81,19 +93,6 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                 />
-              </Form.Group>
-
-              <Form.Group
-                className="mb-3 mt-3"
-                onChange={(e) => setRole(e.target.value)}
-                controlId="formBasicEmail"
-              >
-                <Form.Label>Role</Form.Label>
-                <Form.Select>
-                  <option>select Role</option>
-                  <option value="User">Student</option>
-                  <option value="Teacher">Teacher</option>
-                </Form.Select>
               </Form.Group>
 
               <Form.Group controlId="formFile" className="mb-3">

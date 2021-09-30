@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
 import "./Header.css";
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { tokenLogin } from "../constant";
+import { seprateUserInfo } from "../../utils/GlobalApi";
 
 const Header = () => {
   const { push } = useHistory();
@@ -18,13 +17,11 @@ const Header = () => {
 
   useEffect(() => {
     const getUserInfo = async () => {
-      const seprateUserInfo = await axios.get(
-        "http://192.168.29.6:8000/auth/token",
-        {
-          headers: { Authorization: `${tokenLogin}` },
-        }
-      );
-      setGetSeprateData(seprateUserInfo.data.data);
+      const response = await seprateUserInfo({
+        url: 'auth/token'
+      }
+      )
+      setGetSeprateData(response.data.data)
     };
     getUserInfo();
   }, []);
@@ -57,7 +54,28 @@ const Header = () => {
                   About
                 </Link>
               </Nav.Link>
-              <Nav.Link>Admissions</Nav.Link>
+              
+                  {getSeprateData.role === "User" ? (
+                <Nav.Link><Link
+                to="/addmissionInfo"
+                style={{
+                  textDecoration: "none",
+                  color: "rgba(255,255,255,.55)",
+                }}
+              >
+                Addmission Info
+              </Link></Nav.Link>
+              ) : (
+                <Nav.Link><Link
+                    to="/addmission"
+                    style={{
+                      textDecoration: "none",
+                      color: "rgba(255,255,255,.55)",
+                    }}
+                  >
+                    Addmission
+                  </Link></Nav.Link>
+              )}
               {getSeprateData.role === "User" ? (
                 <Nav.Link>
                   <Link
@@ -111,12 +129,12 @@ const Header = () => {
             </Nav>
             <Nav>
               <div className="userNameDisplay">
-                <p> {getSeprateData.username} </p>
+                <p> {getSeprateData.firstname} {getSeprateData.lastname} </p>
               </div>
               <div className="userDetail">
                 {" "}
                 {getSeprateData &&
-                  getSeprateData.username.charAt(0).toUpperCase()}{" "}
+                  getSeprateData.firstname.charAt(0).toUpperCase()}{" "}
               </div>
               <Button onClick={(e) => logOutHandler(e)}> Log Out </Button>
             </Nav>

@@ -5,6 +5,7 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import { tokenLogin } from "../constant";
 import Header from "../Header/Header";
 import ModalSeprateUser from "./ModalSeprateUser";
+import {historyResponse} from '../../utils/GlobalApi'
 
 const StudentHistory = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -13,13 +14,10 @@ const StudentHistory = () => {
 
   useEffect(() => {
     const getStudentHistoryData = async () => {
-      const historyResponse = await axios.get(
-        "http://192.168.29.6:8000/exam/studentExamHistory",
-        {
-          headers: { Authorization: `Bearer ${tokenLogin}` },
-        }
-      );
-      setStudentData(historyResponse.data.data);
+      const response = await historyResponse({
+        url: 'exam/studentExamHistory',
+      })
+      setStudentData(response.data.data)
     };
     getStudentHistoryData();
   }, []);
@@ -50,7 +48,7 @@ const StudentHistory = () => {
                   studentData && studentData.map((item, i) => (
                 <tr onClick={()=> rowClickHandler(item._id)} key={i}>
                   <td>{i+1}</td>
-                  <td>{item.username}</td>
+                  <td>{item.firstname} {item.lastname}</td>
                   <td>{moment(item.createdAt).format('MMMM Do YYYY, h:mm a')}</td>
                   <td>{item.pastexam.length} Exam Found</td>
                   <td>{item.status}</td>

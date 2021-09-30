@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "./Mcq.css";
 import { tokenLogin } from "../constant";
+import { mcqResponse } from "../../utils/GlobalApi";
 
 const Mcq = () => {
   const [getMcq, setGetMcq] = useState([]);
@@ -20,15 +21,13 @@ const Mcq = () => {
   useEffect(() => {
 
     const getApiMcqData = async () => {
-      const response = await axios.get(
-        "http://192.168.29.6:8000/exam/getQuestion",
+      const response = await mcqResponse(
         {
-          headers: { Authorization: `Bearer ${tokenLogin}` },
+          url: 'exam/getQuestion'
         }
       );
       setGetMcq(response.data.data);
     };
-
     getApiMcqData();
   }, []);
 

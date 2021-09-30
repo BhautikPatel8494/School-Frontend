@@ -97,7 +97,6 @@ const Home = () => {
               statement?
             </p>
             </div>
-
           </Col>
           <Col className="mt-3 text-center">
             <div className="bg-dark text-light p-4 rounded">
@@ -122,7 +121,6 @@ const Home = () => {
               statement?
             </p>
             </div>
-
           </Col>
         </Row>
       </Container>

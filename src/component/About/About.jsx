@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import Carousel from "react-multi-carousel";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 import "./About.css";
 

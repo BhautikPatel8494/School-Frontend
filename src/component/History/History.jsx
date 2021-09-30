@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
-import { tokenLogin } from "../constant";
+import { userHistory } from "../../utils/GlobalApi";
 import Header from "../Header/Header";
 
 const History = () => {
@@ -10,15 +10,15 @@ const History = () => {
 
   useEffect(() => {
     const HistoryDataUser = async () => {
-      const response = await axios.get(
-        "http://192.168.29.6:8000/exam/examHistory",
+      const response = await userHistory(
         {
-          headers: { Authorization: `Bearer ${tokenLogin}` },
+          url: 'exam/examHistory',
         }
       );
       setHistoryData(response.data.data);
     };
     HistoryDataUser();
+
   }, []);
 
   return (
