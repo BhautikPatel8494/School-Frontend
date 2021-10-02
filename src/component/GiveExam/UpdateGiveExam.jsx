@@ -1,29 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Col, Container, Form, Row, Button, Table } from "react-bootstrap";
-import Header from "../Header/Header";
-
-import "./GiveExam.css";
+import moment from "moment";
 import {
   getExamQuestion,
   getExamSubject,
   giveExam,
 } from "../../utils/GlobalApi";
-import moment from "moment";
+import Header from "../Header/Header";
+import "./GiveExam.css";
 
 export default function UpdateGiveExam() {
   const { push } = useHistory();
 
   const [subName, setSubName] = useState("");
-
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setSecondDays] = useState("00");
-
   const [getRandom, setGetRandom] = useState([]);
   const [getNumberIndex, setGetNumberIndex] = useState(0);
   const [resultData, setResultData] = useState([]);
   const [exam, setExam] = useState(false);
-
   const [selectAnswer, setSelectAnswer] = useState("");
   const [idForSend, setIdForSend] = useState("");
 

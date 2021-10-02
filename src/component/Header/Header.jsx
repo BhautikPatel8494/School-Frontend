@@ -1,10 +1,11 @@
-import { Container, Button, Navbar, Nav } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import { Container, Button, Navbar, Nav } from "react-bootstrap";
+
+import { seprateUserInfo } from "../../utils/GlobalApi";
 
 import "./Header.css";
-import { useEffect, useState } from "react";
-import { seprateUserInfo } from "../../utils/GlobalApi";
 
 const Header = () => {
   const { push } = useHistory();
@@ -26,6 +27,7 @@ const Header = () => {
     getUserInfo();
   }, []);
 
+  console.log(`getSeprateData`, getSeprateData)
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -54,7 +56,6 @@ const Header = () => {
                   About
                 </Link>
               </Nav.Link>
-              
                   {getSeprateData && getSeprateData.role === "User" ? (
                 <Nav.Link><Link
                 to="/addmissionInfo"

@@ -1,7 +1,7 @@
+import { useState } from "react";
+import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Col, Container, Form, Row, Button } from "react-bootstrap";
-import { useState } from "react";
 import { addSubjectName } from "../../utils/GlobalApi";
 
 const AddExam = () => {
@@ -10,14 +10,14 @@ const AddExam = () => {
   const submitHandlerForm = async (e) => {
     e.preventDefault();
 
-    const response = await addSubjectName(
+     await addSubjectName(
       {
         url: "exam/addExam",
       },
       { name: subjectName }
     );
-    console.log(`response`, response);
   };
+  
   return (
     <>
       <Header />

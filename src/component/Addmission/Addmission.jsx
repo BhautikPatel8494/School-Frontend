@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { studentAdmission } from "../../utils/GlobalApi";
-import { ToastContainer, toast } from "react-toastify";
-
 
 const Addmission = () => {
   const [choosePhoto, setChoosePhoto] = useState("");
@@ -46,7 +45,6 @@ const Addmission = () => {
       },
       data
     );
-    console.log(`response`, response)
     if(response.data.statusCode === 200){
       toast(response.data.message);
     }
@@ -65,7 +63,7 @@ const Addmission = () => {
                 <Form.Label>Your Photo</Form.Label>
                 <Form.Control
                   name="profile"
-                  required
+                  // required
                   onChange={(e) => setChoosePhoto(e.target.files[0])}
                   type="file"
                 />
@@ -73,7 +71,7 @@ const Addmission = () => {
               <Form.Group as={Col} className="mb-3">
                 <Form.Label>Previous Year Result</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   name="resultPhoto"
                   onChange={(e) => setChooseResultPhoto(e.target.files[0])}
                   type="file"
@@ -85,7 +83,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>First Name</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   onChange={(e) => setFirstName(e.target.value)}
                   type="text"
                   name="firstname"
@@ -97,7 +95,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Middle Name</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   onChange={(e) => setMiddleName(e.target.value)}
                   type="text"
                   name="middlename"
@@ -108,7 +106,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Last Name</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   onChange={(e) => setLastName(e.target.value)}
                   type="text"
                   name="lastname"
@@ -121,7 +119,7 @@ const Addmission = () => {
               <Form.Group as={Col} className="mb-3">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Address"
                   name="address"
@@ -130,7 +128,7 @@ const Addmission = () => {
               <Form.Group as={Col} className="mb-3">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email Id"
                   name="email"
@@ -143,7 +141,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Mobile number</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   type="number"
                   name="mobilenumber"
                   onChange={(e) => setMobileNumber(e.target.value)}
@@ -154,7 +152,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Aadhar number</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   name="aadharnumber"
                   type="number"
                   onChange={(e) => setAadharNumber(e.target.value)}
@@ -165,7 +163,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label> Date Of Birth</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   name="dob"
                   type="date"
                   onChange={(e) => setBirthDate(e.target.value)}
@@ -178,7 +176,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Standard</Form.Label>
                 <Form.Select
-                  required
+                  // required
                   name="standard"
                   onChange={(e) => setStandard(e.target.value)}
                   defaultValue="Choose standard"
@@ -195,7 +193,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Cast</Form.Label>
                 <Form.Select
-                  required
+                  // required
                   name="cast"
                   onChange={(e) => setCast(e.target.value)}
                   defaultValue="Choose Cast"
@@ -211,7 +209,7 @@ const Addmission = () => {
               <Form.Group as={Col}>
                 <Form.Label>Blood Group</Form.Label>
                 <Form.Control
-                  required
+                  // required
                   name="blood_group"
                   onChange={(e) => setBloodGroup(e.target.value)}
                   type="text"
@@ -224,7 +222,7 @@ const Addmission = () => {
 
                 <div className="d-flex">
                   <Form.Check
-                    required
+                    // required
                     onChange={(e) => setGender(e.target.value)}
                     value="male"
                     label="Male"
@@ -233,7 +231,7 @@ const Addmission = () => {
                   />
                   &nbsp;&nbsp;&nbsp;
                   <Form.Check
-                    required
+                    // required
                     value="female"
                     onChange={(e) => setGender(e.target.value)}
                     label="Female"

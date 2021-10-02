@@ -6,9 +6,10 @@ const api = axios.create({
 });
 
 export const seprateUserInfo = async (request) => {
+  const tokenLoginTest = sessionStorage.getItem("token");
   return await api.request({
     url: request.url,
-    headers: { Authorization: `${tokenLogin}` },
+    headers: { Authorization: `${tokenLoginTest}` },
   });
 };
 
