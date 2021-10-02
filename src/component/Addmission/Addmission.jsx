@@ -1,9 +1,10 @@
 import { useState } from "react";
-import axios from "axios";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import { tokenLogin } from "../constant";
+import { studentAdmission } from "../../utils/GlobalApi";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const Addmission = () => {
   const [choosePhoto, setChoosePhoto] = useState("");
@@ -39,17 +40,21 @@ const Addmission = () => {
     data.append("gender", gender);
     data.append("email", email);
 
-    await axios.post(
-      "http://192.168.29.6:8000/api/admission",
-      data,
+    const response = await studentAdmission(
       {
-        headers: { Authorization: `Bearer ${tokenLogin}` },
-      }
+        url: "api/admission",
+      },
+      data
     );
+    console.log(`response`, response)
+    if(response.data.statusCode === 200){
+      toast(response.data.message);
+    }
   };
 
   return (
     <>
+      <ToastContainer />
       <Header />
       <h3 className="text-center mt-5"> Admission Form </h3>
       <Container>

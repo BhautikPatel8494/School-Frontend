@@ -10,7 +10,6 @@ const ModalSeprateUser = (props) => {
     (item) => item._id === singleId
   );
 
-
   return (
     <>
       <Modal
@@ -21,7 +20,7 @@ const ModalSeprateUser = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {seprateDataOfStudent && seprateDataOfStudent.username}'s History
+            {seprateDataOfStudent && seprateDataOfStudent.firstname} {seprateDataOfStudent && seprateDataOfStudent.lastname}'s History
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

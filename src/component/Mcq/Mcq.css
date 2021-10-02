@@ -22,3 +22,6 @@
   text-align: right;
   color: firebrick;
 }
+.deleteLogo:hover{
+  color: red;
+}

@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { Col, Container, Form, Row, Button } from "react-bootstrap";
+import { Col, Container, Form, Row, Button, Table } from "react-bootstrap";
 import Header from "../Header/Header";
-import { tokenLogin } from "../constant";
 
 import "./GiveExam.css";
-import { getExamQuestion } from "../../utils/GlobalApi";
+import {
+  getExamQuestion,
+  getExamSubject,
+  giveExam,
+} from "../../utils/GlobalApi";
+import moment from "moment";
 
-export default function GiveExam() {
+export default function UpdateGiveExam() {
   const { push } = useHistory();
+
+  const [subName, setSubName] = useState("");
 
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setSecondDays] = useState("00");
@@ -20,14 +25,24 @@ export default function GiveExam() {
   const [exam, setExam] = useState(false);
 
   const [selectAnswer, setSelectAnswer] = useState("");
+  const [idForSend, setIdForSend] = useState("");
 
-  const startExamHandler = async () => {
+  useEffect(() => {
+    const getExam = async () => {
+      const getSubExam = await getExamSubject({
+        url: "exam/getExam",
+      });
+      setSubName(getSubExam.data.data);
+    };
+    getExam();
+  }, []);
+
+  const startExamHandler = async (examId) => {
     setExam(true);
-    const response = await getExamQuestion(
-      {
-        url: 'exam/examQuestion'
-      }
-    );
+    setIdForSend(examId);
+    const response = await getExamQuestion({
+      url: `exam/examQuestion/${examId}`,
+    });
     setGetRandom(response.data.data);
     startTimer();
   };
@@ -41,14 +56,11 @@ export default function GiveExam() {
     setResultData([...resultData, objectResult]);
 
     if (isSubmit) {
-      await axios.post(
-        "http://192.168.29.6:8000/exam/submitExam",
+      await giveExam(
         {
-          data: { answers: [...resultData, objectResult] },
+          url: "exam/submitExam",
         },
-        {
-          headers: { Authorization: `Bearer ${tokenLogin}` },
-        }
+        { answers: [...resultData, objectResult], examId: idForSend }
       );
       push("/history");
     }
@@ -62,8 +74,8 @@ export default function GiveExam() {
     (item) => item.id === getRandom[getNumberIndex].id
   );
 
-  const startTimer = async() => {
-    let minuetoAdd = 15;
+  const startTimer = async () => {
+    let minuetoAdd = 20;
     const current = new Date();
     const countdownDate = new Date(current.getTime() + minuetoAdd * 60000);
     setInterval(async () => {
@@ -79,27 +91,55 @@ export default function GiveExam() {
       }
     }, 1000);
   };
-
   return (
     <>
       <Header />
 
-      <Container className="mb-3">
+      <Container className="mb-3 mt-3">
         {!exam ? (
-          <div className="bg-dark p-5 m-5 text-light rounded">
-            <Button
-              onClick={startExamHandler}
-              className="btn btn-info mt-5 w-100"
-            >
-              {" "}
-              Start Exam{" "}
-            </Button>
-            <p className="text-center mt-3">
-              {" "}
-              Press The start button and start the exam & exam time will be 15
-              minute.{" "}
-            </p>
-          </div>
+          <>
+            <h3> Subject List </h3>
+            <p> Press The Start Button & Start The exam: </p>
+            <Row>
+              <Col>
+                <Table striped bordered hover variant="dark">
+                  <thead>
+                    <tr>
+                      <th>Sr. no</th>
+                      <th>Subject Name</th>
+                      <th> Date </th>
+                      <th>Start</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {subName &&
+                      subName.map((item, i) => (
+                        <tr key={i}>
+                          <td>{i + 1}</td>
+                          <td>{item.name}</td>
+                          <td>
+                            {moment(item.createdAt).format(
+                              "MMMM Do YYYY, h:mm a"
+                            )}
+                          </td>
+                          <td>
+                            {" "}
+                            <Button
+                              variant="info"
+                              onClick={() => startExamHandler(item._id)}
+                              className="w-100"
+                              size="sm"
+                            >
+                              Start
+                            </Button>{" "}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </Col>
+            </Row>
+          </>
         ) : (
           <>
             <Row>

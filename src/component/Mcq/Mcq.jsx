@@ -1,16 +1,21 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
 import "./Mcq.css";
-import { tokenLogin } from "../constant";
-import { mcqResponse } from "../../utils/GlobalApi";
+import {
+  deleteMcqQuestion,
+  mcqResponse,
+  questionAdd,
+  getExamSubject,
+} from "../../utils/GlobalApi";
 
 const Mcq = () => {
   const [getMcq, setGetMcq] = useState([]);
+  const [subName, setSubName] = useState([]);
 
+  const [sendExamName, setSendExamName] = useState("");
   const [question, setQuestion] = useState("");
   const [optionA, setOptionA] = useState("");
   const [optionB, setOptionB] = useState("");
@@ -19,16 +24,21 @@ const Mcq = () => {
   const [answer, setAnswer] = useState("");
 
   useEffect(() => {
-
     const getApiMcqData = async () => {
-      const response = await mcqResponse(
-        {
-          url: 'exam/getQuestion'
-        }
-      );
+      const response = await mcqResponse({
+        url: "exam/getQuestion",
+      });
       setGetMcq(response.data.data);
     };
     getApiMcqData();
+
+    const getExam = async () => {
+      const getSubExam = await getExamSubject({
+        url: "exam/getExam",
+      });
+      setSubName(getSubExam.data.data);
+    };
+    getExam();
   }, []);
 
   const dataAddMcq = {
@@ -38,17 +48,17 @@ const Mcq = () => {
     choiceC: optionC,
     choiceD: optionD,
     correct: answer,
+    examId: sendExamName
   };
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const addData = await axios.post(
-      "http://192.168.29.6:8000/exam/addQuestion",
+    const addData = await questionAdd(
+      { url: "exam/addQuestion" },
       dataAddMcq,
-      {
-        headers: { Authorization: `Bearer ${tokenLogin}` },
-      }
+      {}
     );
+
     const dataAdded = addData.data.data;
     setGetMcq([...getMcq, dataAdded]);
     if (addData.status === 200) {
@@ -64,16 +74,15 @@ const Mcq = () => {
   };
 
   const deleteMcqHanlder = async (id) => {
-    const deleteMcq = await axios.delete(`http://192.168.29.6:8000/exam/delete/${id}`,
-    {
-      headers: { Authorization: `Bearer ${tokenLogin}` },
-    }
-    )
-    console.log(`deleteMcq`, deleteMcq)
+    const deleteMcq = await deleteMcqQuestion({
+      url: `exam/delete/${id}`,
+    });
 
-    const getRefershedData = getMcq.filter((item) => item._id !== deleteMcq.data.data?._id)
+    const getRefershedData = getMcq.filter(
+      (item) => item._id !== deleteMcq.data.data?._id
+    );
     setGetMcq(getRefershedData);
-  }
+  };
 
   return (
     <>
@@ -93,8 +102,11 @@ const Mcq = () => {
                         {" "}
                         {i + 1}. {item.title}
                       </p>
-                      <p className="deleteFlex" onClick={(id)=>deleteMcqHanlder(item._id)}>
-                        <i className="fas fa-trash"></i>
+                      <p
+                        className="deleteFlex"
+                        onClick={(id) => deleteMcqHanlder(item._id)}
+                      >
+                        <i className="fas fa-trash deleteLogo"></i>
                       </p>
                     </div>
                     <div>
@@ -106,7 +118,7 @@ const Mcq = () => {
                         }
                       >
                         {" "}
-                         A : {item.choiceA}{" "}
+                        A : {item.choiceA}{" "}
                       </p>
                       <p
                         style={
@@ -116,7 +128,7 @@ const Mcq = () => {
                         }
                       >
                         {" "}
-                         B : {item.choiceB}{" "}
+                        B : {item.choiceB}{" "}
                       </p>
                       <p
                         style={
@@ -126,7 +138,7 @@ const Mcq = () => {
                         }
                       >
                         {" "}
-                         C : {item.choiceC}{" "}
+                        C : {item.choiceC}{" "}
                       </p>
                       <p
                         style={
@@ -136,7 +148,7 @@ const Mcq = () => {
                         }
                       >
                         {" "}
-                         D: {item.choiceD}{" "}
+                        D: {item.choiceD}{" "}
                       </p>
                     </div>
                   </div>
@@ -146,6 +158,16 @@ const Mcq = () => {
           <Col className="addMcqForm" xl="4">
             <Form onSubmit={(e) => formSubmitHandler(e)} autoComplete="off">
               <h2 className="text-center my-2"> Add Mcq </h2>
+
+              <Form.Group onChange={(e) => setSendExamName(e.target.value)} className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Select Subject</Form.Label>
+                <Form.Select>
+                  <option > select subject</option>
+                  {subName &&
+                    subName.map((item, i) => <option value={item._id} >{item.name}</option>)}
+                </Form.Select>
+              </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Question</Form.Label>
                 <Form.Control

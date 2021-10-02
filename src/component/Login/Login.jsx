@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router";
+import { loginStudent, loginTeacher } from "../../utils/GlobalApi";
 
 const Login = () => {
   const { push } = useHistory();
@@ -17,8 +17,8 @@ const Login = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://192.168.29.6:8000/auth/login-teacher",
+      const response = await loginTeacher(
+        { url: "auth/login-teacher" },
         {
           email,
           password,
@@ -40,11 +40,11 @@ const Login = () => {
   const userLoginHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://192.168.29.6:8000/auth/login-user",
+      const response = await loginStudent(
+        { url: "auth/login-user" },
         {
-          loginName:userName,
-          password:userPassword,
+          loginName: userName,
+          password: userPassword,
         }
       );
       if (response.data.statusCode === 200) {
@@ -58,7 +58,7 @@ const Login = () => {
       console.log(`error`, error);
       toast("Invalid login credentials");
     }
-  }
+  };
 
   return (
     <>
@@ -85,7 +85,7 @@ const Login = () => {
               <>
                 <Form onSubmit={(e) => formSubmitHandler(e)}>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <h3 className="my-3"> Teacher's Login</h3>
+                    <h3 className="my-3"> Teacher's Login</h3>
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                       onChange={(e) => setEmail(e.target.value)}
@@ -117,34 +117,34 @@ const Login = () => {
             ) : (
               <>
                 <Form onSubmit={(e) => userLoginHandler(e)}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <h3 className="my-3"> Student's Login</h3>
-                  <Form.Label> UserName </Form.Label>
-                  <Form.Control
-                    onChange={(e) => setUserName(e.target.value)}
-                    type="text"
-                    placeholder="UserName"
-                  />
-                </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <h3 className="my-3"> Student's Login</h3>
+                    <Form.Label> UserName </Form.Label>
+                    <Form.Control
+                      onChange={(e) => setUserName(e.target.value)}
+                      type="text"
+                      placeholder="UserName"
+                    />
+                  </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    onChange={(e) => setUserPassword(e.target.value)}
-                    type="password"
-                    placeholder="Password"
-                  />
-                </Form.Group>
-                <p>
-                  {" "}
-                  Don't Have An Account? <Link to="/register">
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      onChange={(e) => setUserPassword(e.target.value)}
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </Form.Group>
+                  <p>
                     {" "}
-                    Sign-up{" "}
-                  </Link>{" "}
-                </p>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
+                    Don't Have An Account? <Link to="/register">
+                      {" "}
+                      Sign-up{" "}
+                    </Link>{" "}
+                  </p>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
                 </Form>
               </>
             )}

@@ -1,4 +1,3 @@
-import axios from "axios";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
@@ -32,6 +31,7 @@ const History = () => {
               <thead>
                 <tr>
                   <th>Sr No.</th>
+                  <th>Exam Name</th>
                   <th>Exam Date</th>
                   <th>Marks</th>
                   <th>Out Of</th>
@@ -44,6 +44,7 @@ const History = () => {
                   historyData.pastexam && historyData.pastexam.map((exam, i) => (
                     <tr key={i}>
                       <td>{i+1}</td>
+                      <td>{exam.examName}</td>
                       <td>{moment(exam.examDate).format('MMMM Do YYYY, h:mm a')}</td>
                       <td>{exam.totalMarks}</td>
                       <td>10</td>

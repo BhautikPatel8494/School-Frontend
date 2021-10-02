@@ -55,7 +55,7 @@ const Header = () => {
                 </Link>
               </Nav.Link>
               
-                  {getSeprateData.role === "User" ? (
+                  {getSeprateData && getSeprateData.role === "User" ? (
                 <Nav.Link><Link
                 to="/addmissionInfo"
                 style={{
@@ -76,7 +76,20 @@ const Header = () => {
                     Addmission
                   </Link></Nav.Link>
               )}
-              {getSeprateData.role === "User" ? (
+              {getSeprateData && getSeprateData.role === "User" ? null : (
+                <Nav.Link>
+                  <Link
+                    to="/addexam"
+                    style={{
+                      textDecoration: "none",
+                      color: "rgba(255,255,255,.55)",
+                    }}
+                  >
+                    Add Exam
+                  </Link>{" "}
+                </Nav.Link>
+              )}
+              {getSeprateData && getSeprateData.role === "User" ? (
                 <Nav.Link>
                   <Link
                     to="/exam"
@@ -101,7 +114,8 @@ const Header = () => {
                   </Link>{" "}
                 </Nav.Link>
               )}
-              {getSeprateData.role === "User" ? (
+              
+              {getSeprateData && getSeprateData.role === "User" ? (
                 <Nav.Link>
                   <Link
                     to="/history"
@@ -129,7 +143,7 @@ const Header = () => {
             </Nav>
             <Nav>
               <div className="userNameDisplay">
-                <p> {getSeprateData.firstname} {getSeprateData.lastname} </p>
+                <p> {getSeprateData && getSeprateData.firstname} {getSeprateData && getSeprateData.lastname} </p>
               </div>
               <div className="userDetail">
                 {" "}

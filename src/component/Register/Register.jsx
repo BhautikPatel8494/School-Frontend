@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router";
+import { registerNew } from "../../utils/GlobalApi";
 
 const Register = () => {
   const { push } = useHistory();
@@ -24,10 +24,11 @@ const Register = () => {
     data.append("profile", profileHandler);
 
     try {
-      const response = await axios.post(
-        "http://192.168.29.6:8000/auth/register",
+      const response = await registerNew(
+        { url: 'auth/register'},
         data
       );
+
       if (response.status === 200) {
         toast(response.data.message);
         setTimeout(function () {
