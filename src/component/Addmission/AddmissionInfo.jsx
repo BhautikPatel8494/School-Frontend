@@ -1,9 +1,9 @@
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
-import { singleUserInfo } from "../../utils/GlobalApi";
+import moment from "moment";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import { singleUserInfo } from "../../utils/GlobalApi";
 
 const AddmissionInfo = () => {
   const [infoUser, setInfoUser] = useState();
@@ -25,7 +25,13 @@ const AddmissionInfo = () => {
         <h3 className="text-center mb-3"> Admission Info </h3>
         <Row>
           <Col>
-            <Table variant="dark" className="text-center" striped bordered hover>
+            <Table
+              variant="dark"
+              className="text-center"
+              striped
+              bordered
+              hover
+            >
               <tbody>
                 <tr>
                   <td>1</td>

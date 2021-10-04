@@ -9,15 +9,12 @@ const History = () => {
 
   useEffect(() => {
     const HistoryDataUser = async () => {
-      const response = await userHistory(
-        {
-          url: 'exam/examHistory',
-        }
-      );
+      const response = await userHistory({
+        url: "exam/examHistory",
+      });
       setHistoryData(response.data.data);
     };
     HistoryDataUser();
-
   }, []);
 
   return (
@@ -26,7 +23,7 @@ const History = () => {
       <Container>
         <Row>
           <Col>
-          <h3 className="text-center my-5"> Exams Result </h3>
+            <h3 className="text-center my-5"> Exams Result </h3>
             <Table bordered className="mt-5" variant="dark">
               <thead>
                 <tr>
@@ -40,19 +37,28 @@ const History = () => {
                 </tr>
               </thead>
               <tbody>
-                {
-                  historyData.pastexam && historyData.pastexam.map((exam, i) => (
+                {historyData.pastexam &&
+                  historyData.pastexam.map((exam, i) => (
                     <tr key={i}>
-                      <td>{i+1}</td>
+                      <td>{i + 1}</td>
                       <td>{exam.examName}</td>
-                      <td>{moment(exam.examDate).format('MMMM Do YYYY, h:mm a')}</td>
+                      <td>
+                        {moment(exam.examDate).format("MMMM Do YYYY, h:mm a")}
+                      </td>
                       <td>{exam.totalMarks}</td>
                       <td>10</td>
-                      <td>{ exam.totalMarks/10 * 100}%</td>
-                      <td style={ exam.totalMarks/10 * 100 <= 35 ? {backgroundColor:"firebrick"} : {backgroundColor:"green"}}>{ exam.totalMarks/10 * 100 <= 35 ? "Fail" : "Pass"}</td>
+                      <td>{(exam.totalMarks / 10) * 100}%</td>
+                      <td
+                        style={
+                          (exam.totalMarks / 10) * 100 <= 35
+                            ? { backgroundColor: "firebrick" }
+                            : { backgroundColor: "green" }
+                        }
+                      >
+                        {(exam.totalMarks / 10) * 100 <= 35 ? "Fail" : "Pass"}
+                      </td>
                     </tr>
-                  ))
-                  }
+                  ))}
               </tbody>
             </Table>
           </Col>

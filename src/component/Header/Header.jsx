@@ -19,15 +19,13 @@ const Header = () => {
   useEffect(() => {
     const getUserInfo = async () => {
       const response = await seprateUserInfo({
-        url: 'auth/token'
-      }
-      )
-      setGetSeprateData(response.data.data)
+        url: "auth/token",
+      });
+      setGetSeprateData(response.data.data);
     };
     getUserInfo();
   }, []);
 
-  console.log(`getSeprateData`, getSeprateData)
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -56,18 +54,21 @@ const Header = () => {
                   About
                 </Link>
               </Nav.Link>
-                  {getSeprateData && getSeprateData.role === "User" ? (
-                <Nav.Link><Link
-                to="/addmissionInfo"
-                style={{
-                  textDecoration: "none",
-                  color: "rgba(255,255,255,.55)",
-                }}
-              >
-                Addmission Info
-              </Link></Nav.Link>
+              {getSeprateData && getSeprateData.role === "User" ? (
+                <Nav.Link>
+                  <Link
+                    to="/addmissionInfo"
+                    style={{
+                      textDecoration: "none",
+                      color: "rgba(255,255,255,.55)",
+                    }}
+                  >
+                    Addmission Info
+                  </Link>
+                </Nav.Link>
               ) : (
-                <Nav.Link><Link
+                <Nav.Link>
+                  <Link
                     to="/addmission"
                     style={{
                       textDecoration: "none",
@@ -75,7 +76,8 @@ const Header = () => {
                     }}
                   >
                     Addmission
-                  </Link></Nav.Link>
+                  </Link>
+                </Nav.Link>
               )}
               {getSeprateData && getSeprateData.role === "User" ? null : (
                 <Nav.Link>
@@ -115,7 +117,7 @@ const Header = () => {
                   </Link>{" "}
                 </Nav.Link>
               )}
-              
+
               {getSeprateData && getSeprateData.role === "User" ? (
                 <Nav.Link>
                   <Link
@@ -138,13 +140,17 @@ const Header = () => {
                     }}
                   >
                     Student History
-                  </Link>{" "}
+                  </Link>
                 </Nav.Link>
               )}
             </Nav>
             <Nav>
               <div className="userNameDisplay">
-                <p> {getSeprateData && getSeprateData.firstname} {getSeprateData && getSeprateData.lastname} </p>
+                <p>
+                  {" "}
+                  {getSeprateData && getSeprateData.firstname}{" "}
+                  {getSeprateData && getSeprateData.lastname}{" "}
+                </p>
               </div>
               <div className="userDetail">
                 {" "}

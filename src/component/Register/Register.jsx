@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Col, Container, Form, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
+import { Col, Container, Form, Row, Button } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import { registerNew } from "../../utils/GlobalApi";
 
 const Register = () => {
@@ -24,10 +24,7 @@ const Register = () => {
     data.append("profile", profileHandler);
 
     try {
-      const response = await registerNew(
-        { url: 'auth/register'},
-        data
-      );
+      const response = await registerNew({ url: "auth/register" }, data);
 
       if (response.status === 200) {
         toast(response.data.message);
@@ -35,8 +32,7 @@ const Register = () => {
           push("/login");
         }, 5000);
       }
-    } 
-    catch (error) {
+    } catch (error) {
       console.log(`error`, error);
       toast(" Register Not Successfully ");
     }
@@ -51,27 +47,35 @@ const Register = () => {
           <Col>
             <Form onSubmit={(e) => formSubmitHandler(e)}>
               <Row>
-              <Form.Group as={Col} className="mb-3" controlId="formBasicEmail">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="username"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="Enter First Name"
-                />
-              </Form.Group>
+                <Form.Group
+                  as={Col}
+                  className="mb-3"
+                  controlId="formBasicEmail"
+                >
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    placeholder="Enter First Name"
+                  />
+                </Form.Group>
 
-              <Form.Group as={Col} className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="username"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Enter Last Name"
-                />
-              </Form.Group>
+                <Form.Group
+                  as={Col}
+                  className="mb-3"
+                  controlId="formBasicEmail"
+                >
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    placeholder="Enter Last Name"
+                  />
+                </Form.Group>
               </Row>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -20,7 +20,7 @@ export const historyResponse = async (request) => {
   });
 };
 
-export const getExamQuestion = async (request,examId) => {
+export const getExamQuestion = async (request, examId) => {
   return await api.request({
     url: request.url,
     examId,
@@ -50,11 +50,11 @@ export const singleUserInfo = async (request) => {
 };
 
 export const getExamSubject = async (request) => {
-    return await api.request({
-        url: request.url,
-        headers: { Authorization: `Bearer ${tokenLogin}` },
-    })
-}
+  return await api.request({
+    url: request.url,
+    headers: { Authorization: `Bearer ${tokenLogin}` },
+  });
+};
 
 export const studentAdmission = async (request, data) => {
   return await api.request({

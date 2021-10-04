@@ -1,5 +1,5 @@
-import moment from "moment";
 import React from "react";
+import moment from "moment";
 import { Modal, Button, Container, Row, Col, Table } from "react-bootstrap";
 
 const ModalSeprateUser = (props) => {

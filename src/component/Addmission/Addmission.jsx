@@ -45,7 +45,7 @@ const Addmission = () => {
       },
       data
     );
-    if(response.data.statusCode === 200){
+    if (response.data.statusCode === 200) {
       toast(response.data.message);
     }
   };

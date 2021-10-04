@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Form, Row, Button } from "react-bootstrap";
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
 import { ToastContainer, toast } from "react-toastify";
-import "./Mcq.css";
 import {
   deleteMcqQuestion,
   mcqResponse,
   questionAdd,
   getExamSubject,
 } from "../../utils/GlobalApi";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+
+import "./Mcq.css";
 
 const Mcq = () => {
   const [getMcq, setGetMcq] = useState([]);
@@ -48,7 +49,7 @@ const Mcq = () => {
     choiceC: optionC,
     choiceD: optionD,
     correct: answer,
-    examId: sendExamName
+    examId: sendExamName,
   };
 
   const formSubmitHandler = async (e) => {
@@ -159,12 +160,18 @@ const Mcq = () => {
             <Form onSubmit={(e) => formSubmitHandler(e)} autoComplete="off">
               <h2 className="text-center my-2"> Add Mcq </h2>
 
-              <Form.Group onChange={(e) => setSendExamName(e.target.value)} className="mb-3" controlId="formBasicEmail">
+              <Form.Group
+                onChange={(e) => setSendExamName(e.target.value)}
+                className="mb-3"
+                controlId="formBasicEmail"
+              >
                 <Form.Label>Select Subject</Form.Label>
                 <Form.Select>
-                  <option > select subject</option>
+                  <option> select subject</option>
                   {subName &&
-                    subName.map((item, i) => <option value={item._id} >{item.name}</option>)}
+                    subName.map((item, i) => (
+                      <option value={item._id}>{item.name}</option>
+                    ))}
                 </Form.Select>
               </Form.Group>
 

@@ -10,14 +10,14 @@ const AddExam = () => {
   const submitHandlerForm = async (e) => {
     e.preventDefault();
 
-     await addSubjectName(
+    await addSubjectName(
       {
         url: "exam/addExam",
       },
       { name: subjectName }
     );
   };
-  
+
   return (
     <>
       <Header />

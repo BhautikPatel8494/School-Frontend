@@ -76,50 +76,48 @@ const Home = () => {
         <Row>
           <Col className="mt-3 text-center">
             <div className="bg-dark text-light p-4 rounded">
-
-            <h1> Vision </h1>
-            <p>
-              How Brex works What you get Company Sign in Open an account 22
-              Vision Statement Examples to Help You Write Your Own 2021-09-08
-              Hero Image When starting a small business, founders typically have
-              an idea of what they want to achieve—a vision of what success will
-              look like. During the strategic planning process, it’s important
-              to put this vision into concrete terms. Not only does a vision
-              statement clarify your thoughts, but it helps employees and
-              stakeholders understand what the business has set out to
-              accomplish. No matter what the business, a good mission and vision
-              statement can inspire and motivate employees to make that vision a
-              reality. Whether it’s your first or fifth business, writing a
-              compelling vision statement can be challenging. Below, we share
-              how to write a vision statement—one that inspires your employees
-              and positively impacts your business—and we look at a few vision
-              statement examples to help you get started. What is a vision
-              statement?
-            </p>
+              <h1> Vision </h1>
+              <p>
+                How Brex works What you get Company Sign in Open an account 22
+                Vision Statement Examples to Help You Write Your Own 2021-09-08
+                Hero Image When starting a small business, founders typically
+                have an idea of what they want to achieve—a vision of what
+                success will look like. During the strategic planning process,
+                it’s important to put this vision into concrete terms. Not only
+                does a vision statement clarify your thoughts, but it helps
+                employees and stakeholders understand what the business has set
+                out to accomplish. No matter what the business, a good mission
+                and vision statement can inspire and motivate employees to make
+                that vision a reality. Whether it’s your first or fifth
+                business, writing a compelling vision statement can be
+                challenging. Below, we share how to write a vision statement—one
+                that inspires your employees and positively impacts your
+                business—and we look at a few vision statement examples to help
+                you get started. What is a vision statement?
+              </p>
             </div>
           </Col>
           <Col className="mt-3 text-center">
             <div className="bg-dark text-light p-4 rounded">
-
-            <h1> Mission </h1>
-            <p>
-              How Brex works What you get Company Sign in Open an account 22
-              Vision Statement Examples to Help You Write Your Own 2021-09-08
-              Hero Image When starting a small business, founders typically have
-              an idea of what they want to achieve—a vision of what success will
-              look like. During the strategic planning process, it’s important
-              to put this vision into concrete terms. Not only does a vision
-              statement clarify your thoughts, but it helps employees and
-              stakeholders understand what the business has set out to
-              accomplish. No matter what the business, a good mission and vision
-              statement can inspire and motivate employees to make that vision a
-              reality. Whether it’s your first or fifth business, writing a
-              compelling vision statement can be challenging. Below, we share
-              how to write a vision statement—one that inspires your employees
-              and positively impacts your business—and we look at a few vision
-              statement examples to help you get started. What is a vision
-              statement?
-            </p>
+              <h1> Mission </h1>
+              <p>
+                How Brex works What you get Company Sign in Open an account 22
+                Vision Statement Examples to Help You Write Your Own 2021-09-08
+                Hero Image When starting a small business, founders typically
+                have an idea of what they want to achieve—a vision of what
+                success will look like. During the strategic planning process,
+                it’s important to put this vision into concrete terms. Not only
+                does a vision statement clarify your thoughts, but it helps
+                employees and stakeholders understand what the business has set
+                out to accomplish. No matter what the business, a good mission
+                and vision statement can inspire and motivate employees to make
+                that vision a reality. Whether it’s your first or fifth
+                business, writing a compelling vision statement can be
+                challenging. Below, we share how to write a vision statement—one
+                that inspires your employees and positively impacts your
+                business—and we look at a few vision statement examples to help
+                you get started. What is a vision statement?
+              </p>
             </div>
           </Col>
         </Row>
